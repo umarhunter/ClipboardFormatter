@@ -1,6 +1,7 @@
-#include <iostream>
+#include "CFormat.hpp" // technique I learned from my professor on how to make more efficient projects
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    CFormat start;
     return 0;
 }
