@@ -1,4 +1,3 @@
-// This is just a text file that contains email addresses with errors. For now, this will contain examples of what is supported.
-s m a llsp a ces@gmail.com
-s p a c e s with""q "uotationmark" s"@outlook.com
-r eALLLY lon"g e M a Il w"th ma"ny sPa Ces" a nd " quot"ati"on m"arks@yahoo.com
+s m a llsp a ces@randomemail.com
+s p a c e s with""q "uotationmark" s"@randomemail.com
+r eALLLY lon"g e M a Il w"th ma"ny sPa Ces" a nd " quot"ati"on m"arks@randomemail.com

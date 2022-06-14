@@ -10,9 +10,9 @@
 
 CFormat::CFormat() {
     parseVec = retrieveInput();
-    std::cout << "Number of errors found: " << foundError1.size();
+    std::cout << "Number of errors found: " << foundError1.size() << std::endl;
     for(int index = 0; index < parseVec.size(); index++){
-        if(!parseVec[index].size() < 2) // if the line is empty then omit this
+        if(!(parseVec[index].size() < 2)) // if the line is empty then omit this
             parseEmpty.push_back(parseVec[index]);
     }
     size_t size = parseEmpty.size();
