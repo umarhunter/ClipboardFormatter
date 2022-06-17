@@ -12,8 +12,8 @@ class CFormat {
 public:
     CFormat(); // default constructor
     std::vector<std::string> retrieveInput();
+    std::vector<std::string> noMatchingElements(std::vector<std::string> checkVector);
     std::string removeSpaces(std::string line);
-
 private:
     std::vector<std::string> loadedVec; // the initial loaded vector from user input
     std::vector<std::string> foundError; // contains the string that had errors
