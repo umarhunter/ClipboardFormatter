@@ -4,7 +4,7 @@
 
 #include "CFormat.hpp"
 #include <iostream>
-#include <cstdio>
+#include <cstddef>
 #include <vector>
 #include <string>
 
@@ -45,8 +45,7 @@ std::vector<std::string> CFormat::noMatchingElements(std::vector<std::string> ch
     //for(int index = 0; index < size; index++){
     for(int index2 = 1; index2 < size; index2++){
         if(checkVector[index2] == checkVector[index2+1]){
-            //data[index2] = index2;
-            testVec.push_back(index2);
+
         }
     }
     for(int index = 0; index < size; index++){
