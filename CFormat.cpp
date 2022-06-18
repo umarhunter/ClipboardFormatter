@@ -9,14 +9,20 @@
 #include <algorithm>
 
 CFormat::CFormat() {
-    askUserSettings();
+    //duplicatestatus = true;
+    //emptystatus = true;
+    symbolfilter.push_back('"');
+    symbolfilter.push_back(' ');
+    startprogram();
+}
+
+void CFormat::startprogram() {
+    askUserSettings(); // user can select from a variety of options to change from
     retrievedVec = retrieveInput();
     checkedEmptyVec = noEmptyElements();
     checkedDuplicatesVec = noMatchingElements();
     printResults();
 }
-
-
 
 std::vector<std::string> CFormat::retrieveInput() {
     std::string currentline;
