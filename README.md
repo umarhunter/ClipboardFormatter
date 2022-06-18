@@ -16,12 +16,14 @@ Image 4: Display the end result of the program
 
 ### Current Version: 2
 Features:
-* fixed logic with counting number of errors
+* cleaned up code (removed unnecessary functions, variables, etc)
 * added function to check if identical elements (emails) exist to prevent potential spam
+* added a print function
 * Saves result to clipboard
 * Saves result to local directory
 
 #### Previously Completed:
+Version 1:
 * Contains necessary classes and functions (does not have to be complete)
 
 

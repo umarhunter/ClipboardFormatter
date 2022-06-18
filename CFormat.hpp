@@ -2,7 +2,7 @@
 // Created by Mark on 6/11/2022.
 //
 
-#ifndef CLIPBOARDFORMATTER_CFORMAT_HPP  // include guards - makes sure headeer
+#ifndef CLIPBOARDFORMATTER_CFORMAT_HPP  // include guards
 #define CLIPBOARDFORMATTER_CFORMAT_HPP
 #include <cstdio>
 #include <vector>
@@ -11,16 +11,17 @@
 class CFormat {
 public:
     CFormat(); // default constructor
-    std::vector<std::string> retrieveInput();
-    std::vector<std::string> noMatchingElements(std::vector<std::string> checkVector);
-    std::string removeSpaces(std::string line);
+    std::vector<std::string> retrieveInput(); // this vector retrieves the users input
+    std::vector<std::string> noMatchingElements(); // this vector ensures that there are no matching emails
+    std::vector<std::string> noEmptyElements(); // this function returns a vector without empty elements
+    std::string removeSpaces(std::string line); // this function returns a vector without spaces
+    void printResults(); // prints all the results at the end
 private:
-    std::vector<std::string> loadedVec; // the initial loaded vector from user input
-    std::vector<std::string> foundError; // contains the string that had errors
-    std::vector<std::string> parseVec; // save vec after initial parsing
-    std::vector<std::string> parseEmpty; // if the elements within parseVec are empty, skip it
-    std::vector<size_t> foundError1; // contains the indices of space errors in string
-    std::vector<size_t> foundError2; // contains the indices of special character errors in string
+    std::vector<std::string> retrievedVec; // resultant vector after
+    std::vector<std::string> checkedDuplicatesVec; // resultant vector after checking for duplicates
+    std::vector<std::string> checkedEmptyVec; // resultant vector after checking for empty lines
+    std::vector<std::string> foundErrorS; // contains the string that had errors
+    size_t foundErrorI; // contains the number of space errors in string
 };
 
 #endif
