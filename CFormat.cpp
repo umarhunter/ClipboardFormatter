@@ -16,6 +16,8 @@ CFormat::CFormat() {
     printResults();
 }
 
+
+
 std::vector<std::string> CFormat::retrieveInput() {
     std::string currentline;
     while(getline(std::cin,currentline)){
@@ -26,7 +28,7 @@ std::vector<std::string> CFormat::retrieveInput() {
     return retrievedVec;
 }
 
-std::string CFormat::removeSpaces(std::string line) { //
+std::string CFormat::removeSpaces(std::string line) {
     size_t size = line.size();
     std::string stringwospace; // string without spaces
     for(int index = 0; index < size; index++){
