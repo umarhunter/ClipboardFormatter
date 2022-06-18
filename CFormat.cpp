@@ -1,5 +1,5 @@
 //
-// Created by Mark on 6/11/2022.
+// Created by umarhunter on 6/11/2022.
 //
 #include "CFormat.hpp"
 #include <iostream>
@@ -9,6 +9,7 @@
 #include <algorithm>
 
 CFormat::CFormat() {
+    askUserSettings();
     retrievedVec = retrieveInput();
     checkedEmptyVec = noEmptyElements();
     checkedDuplicatesVec = noMatchingElements();
@@ -34,7 +35,7 @@ std::string CFormat::removeSpaces(std::string line) { //
         }
         else{
             foundErrorS.push_back(line); // copies string with errors in vector
-            foundErrorI++; // add to total number of errors found
+            foundErrorN++; // add to total number of errors found
         }
     }
     return stringwospace;
@@ -49,17 +50,18 @@ std::vector<std::string> CFormat::noEmptyElements() {
 }
 
 std::vector<std::string> CFormat::noMatchingElements() {
-    //sort(checkedEmptyVec.begin(), checkedEmptyVec.end());
+    //sort(checkedEmptyVec.begin(), checkedEmptyVec.end()); not really needed but it could be useful
     checkedEmptyVec.erase(unique(checkedEmptyVec.begin(),checkedEmptyVec.end()),checkedEmptyVec.end());
     return checkedEmptyVec;
 }
 
 void CFormat::printResults() {
     std::cout << "Clipboard Formatter has compiled successfully. Here are the results:" << std::endl;
-    std::cout << "Number of errors found: " << foundErrorI << std::endl;
+    std::cout << "Number of errors found: " << foundErrorN << std::endl;
     for(int index = 0; index < checkedDuplicatesVec.size();index++){
         std::cout << checkedDuplicatesVec[index] << std::endl;
     }
 }
+
 
 

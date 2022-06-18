@@ -15,13 +15,14 @@ public:
     std::vector<std::string> noMatchingElements(); // this vector ensures that there are no matching emails
     std::vector<std::string> noEmptyElements(); // this function returns a vector without empty elements
     std::string removeSpaces(std::string line); // this function returns a vector without spaces
+    void askUserSettings(); // ask the user to select from a variety of settings based off their need
     void printResults(); // prints all the results at the end
 private:
     std::vector<std::string> retrievedVec; // resultant vector after
     std::vector<std::string> checkedDuplicatesVec; // resultant vector after checking for duplicates
     std::vector<std::string> checkedEmptyVec; // resultant vector after checking for empty lines
     std::vector<std::string> foundErrorS; // contains the string that had errors
-    size_t foundErrorI; // contains the number of space errors in string
+    size_t foundErrorN; // contains the number of space errors in string
 };
 
 #endif
