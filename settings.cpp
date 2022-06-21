@@ -11,6 +11,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                  "2. Characters\n"
                  "3. Duplicate\n"
                  "4. Empty\n"
+                 "5. Sort\n"
                  "Enter the number of which setting you'd like to configure (if none, enter a non-setting): ";
     std::cin >> operation;
     switch (operation) {

@@ -19,8 +19,6 @@ public:
     void config(int setting); // function gets activated if user wants to make any changes to settings
     void config(bool setting); // boolean version
     void printResults(); // prints all the results at the end
-    //static bool duplicatestatus;
-    //static bool emptystatus;
 private:
     std::vector<std::string> retrievedVec; // resultant vector after
     std::vector<std::string> checkedDuplicatesVec; // resultant vector after checking for duplicates
@@ -29,6 +27,9 @@ private:
     std::vector<char> symbolfilter; // vector containing filter for symbols
     std::vector<char> characterfilter; // vector containing filter for characters
     size_t foundErrorN; // contains the number of space errors in string
+    bool duplicatestatus; // states if duplicates need to be filtered or not
+    bool emptystatus; // states if empty cells need to be filtered or not
+    bool sortstatus; // states if input should be sorted alphabetically
     void startprogram();
 };
 

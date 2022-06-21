@@ -9,8 +9,9 @@
 #include <algorithm>
 
 CFormat::CFormat() {
-    //duplicatestatus = true;
-    //emptystatus = true;
+    duplicatestatus = true;
+    emptystatus = true;
+    sortstatus = false;
     symbolfilter.push_back('"');
     symbolfilter.push_back(' ');
     startprogram();
