@@ -27,12 +27,12 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             if (symbolinput == 'y')
                 config(num);
             else
-                std::cout << "EXITING SYMBOLS SETTINGS..." << std::endl;
+                std::cout << "EXITING SYMBOLS SETTING..." << std::endl;
         } break;
         case 2: {
             int num = 2;
             char characterinput;
-            std::cout << "LOADING CHARACTER FILTER SETTINGS...\nElements currently in character filter list: " << std::endl;
+            std::cout << "LOADING CHARACTER FILTER SETTING...\nElements currently in character filter list: " << std::endl;
             for (int index = 0; index < characterfilter.size(); index++) {
                 std::cout << index+1 << ". "<< "| " << characterfilter[index] << " |" << std::endl;
             }
@@ -41,38 +41,47 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             if (characterinput == 'y')
                 config(num);
             else
-                std::cout << "EXITING CHARACTER SETTINGS..." << std::endl;
+                std::cout << "EXITING CHARACTER SETTING..." << std::endl;
         } break;
         case 3: {
             char dupe;
-            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: "; //<< duplicatestatus << std::endl;
+            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
             std::cout << "Would you like to switch the status? Enter y/n: ";
             std::cin >> dupe;
-            if (dupe == 'y')
-                config();
-            else
-                std::cout << "EXITING CHARACTER SETTINGS..." << std::endl;
+            if (dupe == 'y'){
+                duplicateswitch(duplicatestatus);
+            }
+            else {
+                std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
+            }
         } break;
         case 4: {
-            std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: "; //emptystatus << std::endl;
+            char check;
+            std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus << std::endl;
+            std::cout << "Would you like to switch the status? Enter y/n: ";
+            std::cin >> check;
+            if(check == 'y'){
+                emptyswitch(emptystatus);
+            }
+            else{
+                std::cout << "EXITING EMPTY ELEMENTS SETTING..." << std::endl;
+            }
+
         } break;
+        case 5: {
+            char check;
+            std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus << std::endl;
+            std::cout << "Would you like to switch the status? Enter y/n: ";
+            if(check == 'y'){
+                sortswitch(sortstatus);
+            }
+            else{
+                std::cout << "EXITING SORTING SETTING..." << std::endl;
+            }
+        }
         default: {
-            std::cout << "EXITING SETTINGS....";
+            std::cout << "SAVING AND EXITING SETTINGS....";
         }
     }
 }
 
-void CFormat::config(int s1){ // overloaded function, if this function takes an input it must mean that its
-                              // changing either the symbol or character filter
-    std::string getinput;
-    if(s1 == 1){ // symbols
-        std::cout << " ";
-    }
-    else{ // characters
-        std::cout << " ";
-    }
-}
-
-void CFormat::config(bool s3){ // the other overloaded function
-    std::cout << "config bool ran" << std::endl;
-}

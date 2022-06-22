@@ -16,6 +16,7 @@ private:
     std::vector<std::string> retrieveInput(); // this vector retrieves the users input
     std::vector<std::string> noMatchingElements(std::vector<std::string> vec); // this vector ensures that there are no matching emails
     std::vector<std::string> noEmptyElements(std::vector<std::string> vector); // this function returns a vector without empty elements
+    std::vector<std::string> sortElements(std::vector<std::string> vector);
     std::string removeSpaces(std::string line); // this function returns a vector without spaces
     void askUserSettings(); // ask the user to select from a variety of settings based off their need
     void config(int setting); // function gets activated if user wants to make any changes to settings

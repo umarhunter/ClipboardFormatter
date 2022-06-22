@@ -19,12 +19,15 @@ CFormat::CFormat() {
 
 void CFormat::startprogram() {
     askUserSettings(); // user can select from a variety of options to change from
-    std::vector<std::string> retrievedVec = retrieveInput();
+    std::vector<std::string> retrievedVec;
+    retrievedVec = retrieveInput();
     if(emptystatus)
-        std::vector<std::string> checkedEmptyVec = noEmptyElements(retrievedVec);
-
-    std::vector<std::string> checkedDuplicatesVec = noMatchingElements(checkedEmptyVec);
-    printResults(checkedDuplicatesVec);
+        retrievedVec = noEmptyElements(retrievedVec);
+    if(sortstatus)
+        retrievedVec = sortElements(retrievedVec);
+    if(duplicatestatus)
+        std::vector<std::string> retrievedVec = noMatchingElements(retrievedVec);
+    printResults(retrievedVec);
 }
 
 std::vector<std::string> CFormat::retrieveInput() {
