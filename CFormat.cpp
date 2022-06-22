@@ -19,14 +19,17 @@ CFormat::CFormat() {
 
 void CFormat::startprogram() {
     askUserSettings(); // user can select from a variety of options to change from
-    retrievedVec = retrieveInput();
-    checkedEmptyVec = noEmptyElements();
-    checkedDuplicatesVec = noMatchingElements();
-    printResults();
+    std::vector<std::string> retrievedVec = retrieveInput();
+    if(emptystatus)
+        std::vector<std::string> checkedEmptyVec = noEmptyElements(retrievedVec);
+
+    std::vector<std::string> checkedDuplicatesVec = noMatchingElements(checkedEmptyVec);
+    printResults(checkedDuplicatesVec);
 }
 
 std::vector<std::string> CFormat::retrieveInput() {
     std::string currentline;
+    std::vector<std::string> retrievedVec;
     while(getline(std::cin,currentline)){
         if (currentline == "end")
             break;
@@ -50,25 +53,29 @@ std::string CFormat::removeSpaces(std::string line) {
     return stringwospace;
 }
 
-std::vector<std::string> CFormat::noEmptyElements() {
-    for(int index = 0; index < retrievedVec.size(); index++){
-        if(!(retrievedVec[index].size() < 2)) // if the line is empty then omit this
-            checkedEmptyVec.push_back(retrievedVec[index]);
+std::vector<std::string> CFormat::noEmptyElements(std::vector<std::string> vec) {
+    std::vector<std::string> vec2;
+    for(int index = 0; index < vec.size(); index++){
+        if(!(vec[index].size() < 2)) // if the line is empty then omit this
+            vec2.push_back(vec[index]);
     }
-    return checkedEmptyVec;
+    return vec2;
 }
 
-std::vector<std::string> CFormat::noMatchingElements() {
-    //sort(checkedEmptyVec.begin(), checkedEmptyVec.end()); not really needed but it could be useful
-    checkedEmptyVec.erase(unique(checkedEmptyVec.begin(),checkedEmptyVec.end()),checkedEmptyVec.end());
-    return checkedEmptyVec;
+std::vector<std::string> CFormat::noMatchingElements(std::vector<std::string> vec) {
+    if(sortstatus)
+        sort(vec.begin(), vec.end()); // if user changed settings to sort alphabetically
+    if(duplicatestatus)
+        vec.erase(unique(vec.begin(),vec.end()),vec.end());
+    return vec;
 }
 
-void CFormat::printResults() {
+void CFormat::printResults(std::vector<std::string> result) {
     std::cout << "Clipboard Formatter has compiled successfully. Here are the results:" << std::endl;
     std::cout << "Number of errors found: " << foundErrorN << std::endl;
-    for(int index = 0; index < checkedDuplicatesVec.size();index++){
-        std::cout << checkedDuplicatesVec[index] << std::endl;
+    size_t size = result.size();
+    for(int index = 0; index < size; index++){
+        std::cout << result[index] << std::endl;
     }
 }
 
