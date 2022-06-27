@@ -25,7 +25,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             std::cout << "Would you like to add/remove symbols? Enter y/n: ";
             std::cin >> symbolinput;
             if (symbolinput == 'y')
-                config(num);
+                adjustsymbolfilter();
             else
                 std::cout << "EXITING SYMBOLS SETTING..." << std::endl;
         } break;
@@ -39,7 +39,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             std::cout << "Would you like to add/remove characters? Enter y/n: ";
             std::cin >> characterinput;
             if (characterinput == 'y')
-                config(num);
+                adjustcharfilter();
             else
                 std::cout << "EXITING CHARACTER SETTING..." << std::endl;
         } break;
@@ -83,5 +83,69 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             std::cout << "SAVING AND EXITING SETTINGS....";
         }
     }
+}
+
+
+
+/* SOME OF THESE FUNCTIONS WILL BE REMOVED IF FOUND UNNECESSARY DURING FINAL STAGE */
+void CFormat::emptyswitch(bool emptystatus) {
+    (emptystatus) ? emptystatus = false : emptystatus = true;
+}
+
+void CFormat::sortswitch(bool sortstatus) {
+    (sortstatus) ? sortstatus = false : sortstatus = true;
+}
+
+void CFormat::duplicateswitch(bool duplicatestatus) {
+    (duplicatestatus) ? duplicatestatus = false : duplicatestatus = true;
+}
+
+void CFormat::adjustcharfilter() {
+    int intinput;
+    char charinput;
+    bool complete = true;
+    do{
+        std::cout << "\nPlease enter a valid action:\n"
+                     "1. Add new character to filter\n"
+                     "2. Remove a character from the filter\n"
+                     "3. Exit\n"
+                     "Enter a number: ";
+        std::cin >> intinput;
+    }while(intinput != 1 && intinput != 2 && intinput != 3);
+    if(intinput == 1){
+        do{
+            std::cout << "Please enter a character you would like to add:\n";
+            std::cin >> charinput;
+            while (!(isalpha(charinput))) {
+                std::cout << "Invalid input!\nPlease enter a character:\n";
+                std::cin >> charinput;
+            }
+            if(std::find(std::begin(characterfilter), std::end(characterfilter), charinput) == std::end(characterfilter)){
+                std::cout << "ERROR: This character already exists.\n";
+                complete = false; // confirm that a matching element has been found within vector
+            }
+        }while(complete == false);
+        characterfilter.push_back(charinput);
+    }
+    complete = true;
+    else if(intinput == 2){
+        do{
+            std::cout << "Please enter a character you would like to remove:\n";
+            std::cin >> charinput;
+            while (!(isalpha(charinput))) {
+                std::cout << "Invalid input!\nPlease enter a character:\n";
+                std::cin >> charinput;
+            }
+            if(!(std::find(std::begin(characterfilter), std::end(characterfilter), charinput) == std::end(characterfilter))){
+                std::cout << "ERROR: This character does not exist!\n";
+                complete = false; // confirm that a matching element has been found within vector
+            }
+        }while(complete == false);
+        characterfilter.push_back(charinput);
+    }
+}
+
+void CFormat::adjustsymbolfilter() {
+
 }
 

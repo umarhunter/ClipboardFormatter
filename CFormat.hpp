@@ -19,8 +19,6 @@ private:
     std::vector<std::string> sortElements(std::vector<std::string> vector);
     std::string removeSpaces(std::string line); // this function returns a vector without spaces
     void askUserSettings(); // ask the user to select from a variety of settings based off their need
-    void config(int setting); // function gets activated if user wants to make any changes to settings
-    void config(bool setting); // boolean version
     std::vector<std::string> foundErrorS; // contains the string that had errors
     std::vector<char> symbolfilter; // vector containing filter for symbols
     std::vector<char> characterfilter; // vector containing filter for characters
@@ -29,6 +27,13 @@ private:
     bool emptystatus; // states if empty cells need to be filtered or not
     bool sortstatus; // states if input should be sorted alphabetically
     void startprogram();
+    void emptyswitch(bool emptystatus);
+    void sortswitch(bool sortstatus);
+    void duplicateswitch(bool duplicatestatus);
+
+    void adjustcharfilter();
+
+    void adjustsymbolfilter();
 };
 
 #endif
