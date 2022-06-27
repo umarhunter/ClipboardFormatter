@@ -55,7 +55,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
             }
         } break;
-        case 4: {
+        case 4: { // filter empty status
             char check;
             std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus << std::endl;
             std::cout << "Would you like to switch the status? Enter y/n: ";
@@ -68,7 +68,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             }
 
         } break;
-        case 5: {
+        case 5: { // sort status
             char check;
             std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus << std::endl;
             std::cout << "Would you like to switch the status? Enter y/n: ";
