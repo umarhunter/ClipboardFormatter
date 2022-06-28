@@ -16,7 +16,6 @@ private:
     std::vector<std::string> retrieveInput(); // this vector retrieves the users input
     std::vector<std::string> noMatchingElements(std::vector<std::string> vec); // this vector ensures that there are no matching emails
     std::vector<std::string> noEmptyElements(std::vector<std::string> vector); // this function returns a vector without empty elements
-    std::vector<std::string> sortElements(std::vector<std::string> vector);
     std::string removeSpaces(std::string line); // this function returns a vector without spaces
     void askUserSettings(); // ask the user to select from a variety of settings based off their need
     std::vector<std::string> foundErrorS; // contains the string that had errors
@@ -30,9 +29,7 @@ private:
     void emptyswitch(bool emptystatus);
     void sortswitch(bool sortstatus);
     void duplicateswitch(bool duplicatestatus);
-
     void adjustcharfilter();
-
     void adjustsymbolfilter();
 };
 
