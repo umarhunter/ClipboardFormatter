@@ -23,10 +23,8 @@ void CFormat::startprogram() {
     retrievedVec = retrieveInput();
     if(emptystatus)
         retrievedVec = noEmptyElements(retrievedVec);
-    if(sortstatus)
-        retrievedVec = sortElements(retrievedVec);
     if(duplicatestatus)
-        std::vector<std::string> retrievedVec = noMatchingElements(retrievedVec);
+        retrievedVec = noMatchingElements(retrievedVec);
     printResults(retrievedVec);
 }
 
@@ -41,16 +39,21 @@ std::vector<std::string> CFormat::retrieveInput() {
     return retrievedVec;
 }
 
-std::string CFormat::removeSpaces(std::string line) {
+std::string CFormat::removeSpaces(std::string line) { // primary functions that actually sorts through the strings.
+    // instead of "removing" the said element, it just loads the non-targeted elements into a new vector.
     size_t size = line.size();
     std::string stringwospace; // string without spaces
     for(int index = 0; index < size; index++){
-        if(!isspace(line[index]) && line[index] != '"'){
-            stringwospace += line[index];
-        }
-        else{
+        if(std::find(symbolfilter.begin(), symbolfilter.end(), line[index]) != symbolfilter.end()){
             foundErrorS.push_back(line); // copies string with errors in vector
             foundErrorN++; // add to total number of errors found
+        }
+        else if(std::find(symbolfilter.begin(), symbolfilter.end(), line[index]) != symbolfilter.end()){
+            foundErrorS.push_back(line); // copies string with errors in vector
+            foundErrorN++; // add to total number of errors found
+        }
+        else{
+            stringwospace += line[index];
         }
     }
     return stringwospace;
