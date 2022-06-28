@@ -3,9 +3,9 @@
 //
 #include "CFormat.hpp"
 #include <iostream>
+#include <string>
 #include <cstddef>
 #include <vector>
-#include <string>
 #include <algorithm>
 
 CFormat::CFormat() {
@@ -18,9 +18,9 @@ CFormat::CFormat() {
 }
 
 void CFormat::startprogram() {
-    askUserSettings(); // user can select from a variety of options to change from
-    std::vector<std::string> retrievedVec;
-    retrievedVec = retrieveInput();
+    //askUserSettings(); // user can select from a variety of options to change from
+    std::vector<std::string> emptyvec;
+    std::vector<std::string> retrievedVec = retrieveInput(emptyvec);
     if(emptystatus)
         retrievedVec = noEmptyElements(retrievedVec);
     if(duplicatestatus)
@@ -28,20 +28,19 @@ void CFormat::startprogram() {
     printResults(retrievedVec);
 }
 
-std::vector<std::string> CFormat::retrieveInput() {
+std::vector<std::string> CFormat::retrieveInput(std::vector<std::string> emptyvec) { // retrieves the user input and loads corrected version into vector.
     std::string currentline;
-    std::vector<std::string> retrievedVec;
     while(getline(std::cin,currentline)){
         if (currentline == "end")
             break;
-        retrievedVec.push_back(removeSpaces(currentline)); // store this in a vector so that we can save it in the user clipboard at the completion of the program
+        emptyvec.push_back(removeSpaces(currentline)); // store this in a vector so that we can save it in the user clipboard at the completion of the program
     }
-    return retrievedVec;
+    return emptyvec;
 }
 
-std::string CFormat::removeSpaces(std::string line) { // primary functions that actually sorts through the strings.
+std::string CFormat::removeSpaces(std::string line) { // primary function that actually sorts through the strings.
     // instead of "removing" the said element, it just loads the non-targeted elements into a new vector.
-    size_t size = line.size();
+    size_t size = line.size(); // size of the string
     std::string stringwospace; // string without spaces
     for(int index = 0; index < size; index++){
         if(std::find(symbolfilter.begin(), symbolfilter.end(), line[index]) != symbolfilter.end()){
@@ -84,6 +83,4 @@ void CFormat::printResults(std::vector<std::string> result) {
         std::cout << result[index] << std::endl;
     }
 }
-
-
 

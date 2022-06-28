@@ -19,8 +19,8 @@ Features:
 * cleaned up code (removed unnecessary functions, variables, etc)
 * added function to check if identical elements (emails) exist to prevent potential spam
 * added a print function
-* Saves result to clipboard
-* Saves result to local directory
+* added function that checks for empty emails
+* user settings! (this took some massive investment and time)
 
 #### Previously Completed:
 Version 1:
