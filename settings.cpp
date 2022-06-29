@@ -15,7 +15,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                  "3. Duplicate\n"
                  "4. Empty\n"
                  "5. Sort\n"
-                 "Enter the number of which setting you'd like to configure (if none, enter a non-setting): ";
+                 "Enter the number of which setting you'd like to configure (if none, enter a non-setting):" << std::endl;
     std::cin >> operation;
     switch (operation) {
         case 1: {
@@ -35,11 +35,11 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
         case 2: {
             int num = 2;
             char characterinput;
-            std::cout << "LOADING CHARACTER FILTER SETTING...\nElements currently in character filter list: " << std::endl;
+            std::cout << "LOADING CHARACTER FILTER SETTING...\nElements currently in character filter list:\n";
             for (int index = 0; index < characterfilter.size(); index++) {
                 std::cout << index+1 << ". "<< "| " << characterfilter[index] << " |" << std::endl;
             }
-            std::cout << "Would you like to add/remove characters? Enter y/n: ";
+            std::cout << "Would you like to add/remove characters?\nEnter y/n: ";
             std::cin >> characterinput;
             if (characterinput == 'y')
                 adjustcharfilter();
@@ -48,8 +48,8 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
         } break;
         case 3: {
             char dupe;
-            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
-            std::cout << "Would you like to switch the status? Enter y/n: ";
+            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO:" << duplicatestatus;
+            std::cout << "Would you like to switch the status?\nEnter y/n: ";
             std::cin >> dupe;
             if (dupe == 'y'){
                 duplicateswitch(duplicatestatus);
@@ -60,7 +60,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
         } break;
         case 4: { // filter empty status
             char check;
-            std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus << std::endl;
+            std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus;
             std::cout << "Would you like to switch the status? Enter y/n: ";
             std::cin >> check;
             if(check == 'y'){

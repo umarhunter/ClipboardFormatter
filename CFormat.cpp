@@ -18,7 +18,7 @@ CFormat::CFormat() {
 }
 
 void CFormat::startprogram() {
-    //askUserSettings(); // user can select from a variety of options to change from
+    askUserSettings(); // user can select from a variety of options to change from
     std::vector<std::string> emptyvec;
     std::vector<std::string> retrievedVec = retrieveInput(emptyvec);
     if(emptystatus)
