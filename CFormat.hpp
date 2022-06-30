@@ -26,9 +26,9 @@ private:
     bool emptystatus; // states if empty cells need to be filtered or not
     bool sortstatus; // states if input should be sorted alphabetically
     void startprogram();
-    void emptyswitch(bool emptystatus);
-    void sortswitch(bool sortstatus);
-    void duplicateswitch(bool duplicatestatus);
+    void emptyswitch(bool &emptystatus);
+    void sortswitch(bool &sortstatus);
+    void duplicateswitch(bool &duplicatestatus);
     void adjustcharfilter();
     void adjustsymbolfilter();
 };

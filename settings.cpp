@@ -10,7 +10,6 @@
 
 void CFormat::askUserSettings() { // ask the user a variety of questions to suit their needs
     int operation;
-    char exit;
     std::cout << "LOADING USER SETTINGS....\n"
                  "1. Symbols\n"
                  "2. Characters\n"
@@ -18,6 +17,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                  "4. Empty\n"
                  "5. Sort\n"
                  "Enter the number of which setting you'd like to configure (to end program, enter any char):" << std::endl;
+    std::cin >> operation;
     switch (operation) {
         case 1: { // symbol filter
             char symbolinput;
@@ -34,7 +34,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
         } break;
         case 2: { // character filter
             char characterinput;
-            std::cout << "LOADING CHARACTER FILTER SETTING...\nElements currently in character filter list:\n";
+            std::cout << "LOADING CHARACTER FILTER SETTINGS...\nElements currently in character filter list:\n";
             for (int index = 0; index < characterfilter.size(); index++) {
                 std::cout << index+1 << ". "<< "| " << characterfilter[index] << " |" << std::endl;
             }
@@ -47,11 +47,12 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
         } break;
         case 3: { // duplicate settings
             char dupe;
-            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO:" << duplicatestatus << std::endl;
+            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
             std::cout << "Would you like to switch the status?\nEnter y/n: ";
             std::cin >> dupe;
             if (dupe == 'y'){
                 duplicateswitch(duplicatestatus);
+                std::cout << "DUPLICATE STATUS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
             }
             else {
                 std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
@@ -64,6 +65,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             std::cin >> check;
             if(check == 'y'){
                 emptyswitch(emptystatus);
+                std::cout << "EMPTY STATUS IS CURRENTLY SET TO: " << emptystatus << std::endl;
             }
             else{
                 std::cout << "EXITING EMPTY ELEMENTS SETTING..." << std::endl;
@@ -76,6 +78,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
             std::cin >> check;
             if(check == 'y'){
                 sortswitch(sortstatus);
+                std::cout << "SORT STATUS IS CURRENTLY SET TO: " << sortstatus << std::endl;
             }
             else{
                 std::cout << "EXITING SORTING SETTING..." << std::endl;
@@ -88,15 +91,15 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
 }
 
 /* SOME OF THESE FUNCTIONS WILL BE REMOVED IF FOUND UNNECESSARY DURING FINAL STAGE */
-void CFormat::emptyswitch(bool emptystatus) {
+void CFormat::emptyswitch(bool &emptystatus) {
     (emptystatus) ? emptystatus = false : emptystatus = true;
 }
 
-void CFormat::sortswitch(bool sortstatus) {
+void CFormat::sortswitch(bool &sortstatus) {
     (sortstatus) ? sortstatus = false : sortstatus = true;
 }
 
-void CFormat::duplicateswitch(bool duplicatestatus) {
+void CFormat::duplicateswitch(bool &duplicatestatus) {
     (duplicatestatus) ? duplicatestatus = false : duplicatestatus = true;
 }
 
