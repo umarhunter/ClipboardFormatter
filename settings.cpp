@@ -9,85 +9,100 @@
 #include <cctype>
 
 void CFormat::askUserSettings() { // ask the user a variety of questions to suit their needs
-    int operation;
-    std::cout << "LOADING USER SETTINGS....\n"
-                 "1. Symbols\n"
-                 "2. Characters\n"
-                 "3. Duplicate\n"
-                 "4. Empty\n"
-                 "5. Sort\n"
-                 "Enter the number of which setting you'd like to configure (to end program, enter any char):" << std::endl;
-    std::cin >> operation;
-    switch (operation) {
-        case 1: { // symbol filter
-            char symbolinput;
-            std::cout << "LOADING SYMBOL FILTER SETTINGS...\nElements currently in symbols filter list: " << std::endl;
-            for (int index = 0; index < symbolfilter.size(); index++) {
-                std::cout << index+1 << ". "<< "| " << symbolfilter[index] << " |" << std::endl;
+    int loop;
+    do {
+        loop = 0;
+        int operation;
+        std::cout << "LOADING USER SETTINGS....\n"
+                     "1. Symbols\n"
+                     "2. Characters\n"
+                     "3. Duplicate\n"
+                     "4. Empty\n"
+                     "5. Sort\n"
+                     "Enter the number of which setting you'd like to configure (to end program, enter any char):"
+                  << std::endl;
+        std::cin >> operation;
+        switch (operation) {
+            case 1: { // symbol filter
+                char symbolinput;
+                std::cout << "LOADING SYMBOL FILTER SETTINGS...\nElements currently in symbols filter list: "
+                          << std::endl;
+                for (int index = 0; index < symbolfilter.size(); index++) {
+                    std::cout << index + 1 << ". " << "| " << symbolfilter[index] << " |" << std::endl;
+                }
+                std::cout << "Would you like to add/remove symbols? Enter y/n: ";
+                std::cin >> symbolinput;
+                if (symbolinput == 'y')
+                    adjustsymbolfilter();
+                else
+                    std::cout << "EXITING SYMBOLS SETTING..." << std::endl;
             }
-            std::cout << "Would you like to add/remove symbols? Enter y/n: ";
-            std::cin >> symbolinput;
-            if (symbolinput == 'y')
-                adjustsymbolfilter();
-            else
-                std::cout << "EXITING SYMBOLS SETTING..." << std::endl;
-        } break;
-        case 2: { // character filter
-            char characterinput;
-            std::cout << "LOADING CHARACTER FILTER SETTINGS...\nElements currently in character filter list:\n";
-            for (int index = 0; index < characterfilter.size(); index++) {
-                std::cout << index+1 << ". "<< "| " << characterfilter[index] << " |" << std::endl;
+                break;
+            case 2: { // character filter
+                char characterinput;
+                std::cout << "LOADING CHARACTER FILTER SETTINGS...\nElements currently in character filter list:\n";
+                for (int index = 0; index < characterfilter.size(); index++) {
+                    std::cout << index + 1 << ". " << "| " << characterfilter[index] << " |" << std::endl;
+                }
+                std::cout << "Would you like to add/remove characters?\nEnter y/n: ";
+                std::cin >> characterinput;
+                if (characterinput == 'y')
+                    adjustcharfilter();
+                else
+                    std::cout << "EXITING CHARACTER SETTING..." << std::endl;
             }
-            std::cout << "Would you like to add/remove characters?\nEnter y/n: ";
-            std::cin >> characterinput;
-            if (characterinput == 'y')
-                adjustcharfilter();
-            else
-                std::cout << "EXITING CHARACTER SETTING..." << std::endl;
-        } break;
-        case 3: { // duplicate settings
-            char dupe;
-            std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
-            std::cout << "Would you like to switch the status?\nEnter y/n: ";
-            std::cin >> dupe;
-            if (dupe == 'y'){
-                duplicateswitch(duplicatestatus);
-                std::cout << "DUPLICATE STATUS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
+                break;
+            case 3: { // duplicate settings
+                char dupe;
+                std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
+                std::cout << "Would you like to switch the status?\n"
+                             "Enter y/n: ";
+                std::cin >> dupe;
+                if (dupe == 'y') {
+                    duplicateswitch(duplicatestatus);
+                    std::cout << "DUPLICATE STATUS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
+                } else {
+                    std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
+                }
             }
-            else {
-                std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
+                break;
+            case 4: { // filter empty status
+                char check;
+                std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus;
+                std::cout << "\nWould you like to switch the status?\n"
+                             "Enter y/n:";
+                std::cin >> check;
+                if (check == 'y') {
+                    emptyswitch(emptystatus);
+                    std::cout << "EMPTY STATUS IS CURRENTLY SET TO: " << emptystatus << std::endl;
+                } else {
+                    std::cout << "EXITING EMPTY ELEMENTS SETTING..." << std::endl;
+                }
             }
-        } break;
-        case 4: { // filter empty status
-            char check;
-            std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus << std::endl;
-            std::cout << "Would you like to switch the status?\nEnter y/n: ";
-            std::cin >> check;
-            if(check == 'y'){
-                emptyswitch(emptystatus);
-                std::cout << "EMPTY STATUS IS CURRENTLY SET TO: " << emptystatus << std::endl;
+                break;
+            case 5: { // sort status
+                char check;
+                std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus << std::endl;
+                std::cout << "Would you like to switch the status? Enter y/n: ";
+                std::cin >> check;
+                if (check == 'y') {
+                    sortswitch(sortstatus);
+                    std::cout << "SORT STATUS IS CURRENTLY SET TO: " << sortstatus << std::endl;
+                } else {
+                    std::cout << "EXITING SORTING SETTING..." << std::endl;
+                }
             }
-            else{
-                std::cout << "EXITING EMPTY ELEMENTS SETTING..." << std::endl;
+                break;
+            default: { // no valid input, assume user wants to exit settings
+                std::cout << "SAVING AND EXITING SETTINGS....\n";
             }
-        } break;
-        case 5: { // sort status
-            char check;
-            std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus << std::endl;
-            std::cout << "Would you like to switch the status? Enter y/n: ";
-            std::cin >> check;
-            if(check == 'y'){
-                sortswitch(sortstatus);
-                std::cout << "SORT STATUS IS CURRENTLY SET TO: " << sortstatus << std::endl;
-            }
-            else{
-                std::cout << "EXITING SORTING SETTING..." << std::endl;
-            }
-        } break;
-        default: { // no valid input, assume user wants to exit settings
-            std::cout << "SAVING AND EXITING SETTINGS....\n";
         }
-    }
+        char input;
+        std::cout << "ADJUST MORE SETTINGS? y/n: ";
+        std::cin >> input;
+        if (input == 'y' || input == 'Y')
+            loop = 1;
+    } while (loop == 1);
 }
 
 /* SOME OF THESE FUNCTIONS WILL BE REMOVED IF FOUND UNNECESSARY DURING FINAL STAGE */
