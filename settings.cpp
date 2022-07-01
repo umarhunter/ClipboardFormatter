@@ -106,16 +106,59 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
 }
 
 /* SOME OF THESE FUNCTIONS WILL BE REMOVED IF FOUND UNNECESSARY DURING FINAL STAGE */
-void CFormat::emptyswitch(bool &emptystatus) {
-    (emptystatus) ? emptystatus = false : emptystatus = true;
-}
 
-void CFormat::sortswitch(bool &sortstatus) {
-    (sortstatus) ? sortstatus = false : sortstatus = true;
-}
-
-void CFormat::duplicateswitch(bool &duplicatestatus) {
-    (duplicatestatus) ? duplicatestatus = false : duplicatestatus = true;
+void CFormat::adjustsymbolfilter() {
+    int intinput;
+    char symbolinput;
+    bool complete = true;
+    do{
+        std::cout << "\nPlease enter a valid action:\n"
+                     "1. Add new character to filter\n"
+                     "2. Remove a character from the filter\n"
+                     "3. Exit\n"
+                     "Enter a number: ";
+        std::cin >> intinput;
+    }while(intinput != 1 && intinput != 2 && intinput != 3);
+    if(intinput == 1){
+        do{
+            std::cout << "Please enter a symbol you would like to add:\n";
+            std::cin >> symbolinput;
+            while (!(isalpha(symbolinput))) {
+                std::cout << "Invalid input!\nPlease enter a character:\n";
+                std::cin >> symbolinput;
+            }
+            if(!(std::find(std::begin(symbolfilter), std::end(symbolfilter), symbolinput) == std::end(symbolfilter))){
+                std::cout << "ERROR: This character already exists.\n";
+                complete = false; // confirm that a matching element has NOT been found within vector
+            }
+        }while(complete == false);
+        symbolfilter.push_back(symbolinput);
+        complete = true;
+    }
+    else if(intinput == 2){
+        do{
+            std::cout << "Please enter a symbol you would like to remove:\n";
+            std::cin >> symbolinput;
+            while ((isalpha(symbolinput))) {
+                std::cout << "Invalid input!\nPlease enter a symbol:\n";
+                std::cin >> symbolinput;
+            }
+            if(!(std::find(std::begin(symbolfilter), std::end(symbolfilter), symbolinput) == std::end(symbolfilter))){
+                size_t size = symbolfilter.size();
+                std::vector<char> backupsymbolfilter = symbolfilter;
+                symbolfilter.clear();
+                for(int index = 0; index < size; index++){
+                    if(backupsymbolfilter[index] != symbolinput){
+                        symbolfilter.push_back(backupsymbolfilter[index]);
+                    }
+                }
+                complete = true; // confirm that a matching element has been found and successfully removed within vector
+            }
+        }while(complete == false);
+    }
+    else{
+        std::cout << "EXITING....\n";
+    }
 }
 
 void CFormat::adjustcharfilter() {
@@ -165,52 +208,16 @@ void CFormat::adjustcharfilter() {
         std::cout << "EXITING....\n";
     }
 }
-
-void CFormat::adjustsymbolfilter() {
-    int intinput;
-    char symbolinput;
-    bool complete = true;
-    do{
-        std::cout << "\nPlease enter a valid action:\n"
-                     "1. Add new character to filter\n"
-                     "2. Remove a character from the filter\n"
-                     "3. Exit\n"
-                     "Enter a number: ";
-        std::cin >> intinput;
-    }while(intinput != 1 && intinput != 2 && intinput != 3);
-    if(intinput == 1){
-        do{
-            std::cout << "Please enter a symbol you would like to add:\n";
-            std::cin >> symbolinput;
-            while (!(isalpha(symbolinput))) {
-                std::cout << "Invalid input!\nPlease enter a character:\n";
-                std::cin >> symbolinput;
-            }
-            if(std::find(std::begin(characterfilter), std::end(characterfilter), symbolinput) == std::end(characterfilter)){
-                std::cout << "ERROR: This character already exists.\n";
-                complete = false; // confirm that a matching element has been found within vector
-            }
-        }while(complete == false);
-        symbolfilter.push_back(symbolinput);
-        complete = true;
-    }
-    else if(intinput == 2){
-        do{
-            std::cout << "Please enter a character you would like to remove:\n";
-            std::cin >> symbolinput;
-            while (!(isalpha(symbolinput))) {
-                std::cout << "Invalid input!\nPlease enter a character:\n";
-                std::cin >> symbolinput;
-            }
-            if(!(std::find(std::begin(symbolfilter), std::end(symbolfilter), symbolinput) == std::end(symbolfilter))){
-                std::cout << "ERROR: This character does not exist!\n";
-                complete = false; // confirm that a matching element has been found within vector
-            }
-        }while(complete == false);
-        symbolfilter.push_back(symbolinput);
-    }
-    else{
-        std::cout << "EXITING....\n";
-    }
+void CFormat::emptyswitch(bool &emptystatus) {
+    (emptystatus) ? emptystatus = false : emptystatus = true;
 }
+
+void CFormat::sortswitch(bool &sortstatus) {
+    (sortstatus) ? sortstatus = false : sortstatus = true;
+}
+
+void CFormat::duplicateswitch(bool &duplicatestatus) {
+    (duplicatestatus) ? duplicatestatus = false : duplicatestatus = true;
+}
+
 
