@@ -123,12 +123,14 @@ void CFormat::adjustsymbolfilter() {
         do{
             std::cout << "Please enter a symbol you would like to add:\n";
             std::cin >> symbolinput;
-            while (!(isalpha(symbolinput))) {
-                std::cout << "Invalid input!\nPlease enter a character:\n";
+            while(isalpha(symbolinput)) {
+                std::cerr << "INVALID INPUT\n";
+                std::cout << "Please enter a symbol: " << std::endl;
                 std::cin >> symbolinput;
             }
-            if(!(std::find(std::begin(symbolfilter), std::end(symbolfilter), symbolinput) == std::end(symbolfilter))){
-                std::cout << "ERROR: This character already exists.\n";
+            complete = true;
+            if(std::find(symbolfilter.begin(), symbolfilter.end(), symbolinput) != symbolfilter.end()){ // if vector contains symbolinput
+                std::cerr << "ERROR: THIS SYMBOL ALREADY EXISTS\n";
                 complete = false; // confirm that a matching element has NOT been found within vector
             }
         }while(complete == false);
@@ -139,11 +141,12 @@ void CFormat::adjustsymbolfilter() {
         do{
             std::cout << "Please enter a symbol you would like to remove:\n";
             std::cin >> symbolinput;
-            while ((isalpha(symbolinput))) {
-                std::cout << "Invalid input!\nPlease enter a symbol:\n";
+            while ((isalpha(symbolinput)) || isdigit(symbolinput)) {
+                std::cerr << "ERROR: INVALID INPUT\n";
+                std::cout << "Please enter a symbol:\n";
                 std::cin >> symbolinput;
             }
-            if(!(std::find(std::begin(symbolfilter), std::end(symbolfilter), symbolinput) == std::end(symbolfilter))){
+            if(std::find(symbolfilter.begin(), symbolfilter.end(), symbolinput) != symbolfilter.end()){ // if vector contains symbolinput
                 size_t size = symbolfilter.size();
                 std::vector<char> backupsymbolfilter = symbolfilter;
                 symbolfilter.clear();
@@ -152,7 +155,12 @@ void CFormat::adjustsymbolfilter() {
                         symbolfilter.push_back(backupsymbolfilter[index]);
                     }
                 }
+                std::cout << "SUCCESS. " << symbolinput << " HAS BEEN SUCCESSFULLY REMOVED FROM THE FILTER LIST." << std::endl;
                 complete = true; // confirm that a matching element has been found and successfully removed within vector
+            }
+            else{
+                std::cerr << "ERROR: THE FILTER DOES NOT CONTAIN SELECTED INPUT\n";
+                complete = false;
             }
         }while(complete == false);
     }
