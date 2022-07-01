@@ -54,13 +54,13 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 break;
             case 3: { // duplicate settings
                 char dupe;
-                std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
+                std::cout << "FILTER DUPLICATE ELEMENTS IS CURRENTLY SET TO: " << (duplicatestatus) ? std::cout << " - ON\n" : std::cout << "OFF\n";
                 std::cout << "Would you like to switch the status?\n"
                              "Enter y/n: ";
                 std::cin >> dupe;
                 if (dupe == 'y') {
                     duplicateswitch(duplicatestatus);
-                    std::cout << "DUPLICATE STATUS IS CURRENTLY SET TO: " << duplicatestatus << std::endl;
+                    std::cout << "DUPLICATE STATUS IS CURRENTLY SET TO: " << (duplicatestatus) ? std::cout << " - ON\n" : std::cout << "OFF\n";
                 } else {
                     std::cout << "EXITING DUPLICATE ELEMENTS SETTING..." << std::endl;
                 }
@@ -68,13 +68,13 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 break;
             case 4: { // filter empty status
                 char check;
-                std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus;
+                std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << (emptystatus) ? std::cout << " - ON\n" : std::cout << "OFF\n";
                 std::cout << "\nWould you like to switch the status?\n"
                              "Enter y/n:";
                 std::cin >> check;
                 if (check == 'y') {
                     emptyswitch(emptystatus);
-                    std::cout << "EMPTY STATUS IS CURRENTLY SET TO: " << emptystatus << std::endl;
+                    std::cout << "EMPTY STATUS IS CURRENTLY SET TO: " << (emptystatus) ? std::cout << " - OFF\n" : std::cout << "ON\n";
                 } else {
                     std::cout << "EXITING EMPTY ELEMENTS SETTING..." << std::endl;
                 }
@@ -82,12 +82,12 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 break;
             case 5: { // sort status
                 char check;
-                std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus << std::endl;
+                std::cout << "SORTING IS CURRENTLY SET TO: " << (sortstatus) ? std::cout << " - OFF\n" : std::cout << "ON\n";
                 std::cout << "Would you like to switch the status? Enter y/n: ";
                 std::cin >> check;
                 if (check == 'y') {
                     sortswitch(sortstatus);
-                    std::cout << "SORT STATUS IS CURRENTLY SET TO: " << sortstatus << std::endl;
+                    std::cout << "SORT STATUS IS CURRENTLY SET TO: " << (sortstatus) ? std::cout << " - ON\n" : std::cout << "OFF\n";
                 } else {
                     std::cout << "EXITING SORTING SETTING..." << std::endl;
                 }
@@ -113,8 +113,8 @@ void CFormat::adjustsymbolfilter() {
     bool complete = true;
     do{
         std::cout << "\nPlease enter a valid action:\n"
-                     "1. Add new character to filter\n"
-                     "2. Remove a character from the filter\n"
+                     "1. Add new symbol to filter\n"
+                     "2. Remove a symbol from the filter\n"
                      "3. Exit\n"
                      "Enter a number: ";
         std::cin >> intinput;
@@ -135,6 +135,7 @@ void CFormat::adjustsymbolfilter() {
             }
         }while(complete == false);
         symbolfilter.push_back(symbolinput);
+        std::cout << "SUCCESS. " << symbolinput << " HAS BEEN SUCCESSFULLY ADDED TO THE FILTER LIST." << std::endl;
         complete = true;
     }
     else if(intinput == 2){
@@ -185,37 +186,53 @@ void CFormat::adjustcharfilter() {
         do{
             std::cout << "Please enter a character you would like to add:\n";
             std::cin >> charinput;
-            while (!(isalpha(charinput))) {
-                std::cout << "Invalid input!\nPlease enter a character:\n";
+            while(!(isalpha(charinput))) {
+                std::cerr << "INVALID INPUT\n";
+                std::cout << "Please enter a character: " << std::endl;
                 std::cin >> charinput;
             }
-            if(std::find(std::begin(characterfilter), std::end(characterfilter), charinput) == std::end(characterfilter)){
-                std::cout << "ERROR: This character already exists.\n";
-                complete = false; // confirm that a matching element has been found within vector
+            complete = true;
+            if(std::find(characterfilter.begin(), characterfilter.end(), charinput) != characterfilter.end()){ // if vector contains charinput
+                std::cerr << "ERROR: THIS CHARACTER ALREADY EXISTS\n";
+                complete = false; // confirm that a matching element has NOT been found within vector
             }
         }while(complete == false);
         characterfilter.push_back(charinput);
+        std::cout << "SUCCESS. " << charinput << " HAS BEEN SUCCESSFULLY ADDED TO THE FILTER LIST." << std::endl;
         complete = true;
     }
     else if(intinput == 2){
         do{
             std::cout << "Please enter a character you would like to remove:\n";
             std::cin >> charinput;
-            while (!(isalpha(charinput))) {
-                std::cout << "Invalid input!\nPlease enter a character:\n";
+            while (!(isalpha(charinput)) || isdigit(charinput)) {
+                std::cerr << "ERROR: INVALID INPUT\n";
+                std::cout << "Please enter a character:\n";
                 std::cin >> charinput;
             }
-            if(!(std::find(std::begin(characterfilter), std::end(characterfilter), charinput) == std::end(characterfilter))){
-                std::cout << "ERROR: This character does not exist!\n";
-                complete = false; // confirm that a matching element has been found within vector
+            if(std::find(characterfilter.begin(), characterfilter.end(), charinput) != characterfilter.end()){ // if vector contains charinput
+                size_t size = characterfilter.size();
+                std::vector<char> backupcharfilter = characterfilter;
+                characterfilter.clear();
+                for(int index = 0; index < size; index++){
+                    if(backupcharfilter[index] != charinput){
+                        characterfilter.push_back(backupcharfilter[index]);
+                    }
+                }
+                std::cout << "SUCCESS. " << charinput << " HAS BEEN SUCCESSFULLY REMOVED FROM THE FILTER LIST." << std::endl;
+                complete = true; // confirm that a matching element has been found and successfully removed within vector
+            }
+            else{
+                std::cerr << "ERROR: THE FILTER DOES NOT CONTAIN SELECTED INPUT\n";
+                complete = false;
             }
         }while(complete == false);
-        characterfilter.push_back(charinput);
     }
     else{
         std::cout << "EXITING....\n";
     }
 }
+
 void CFormat::emptyswitch(bool &emptystatus) {
     (emptystatus) ? emptystatus = false : emptystatus = true;
 }
