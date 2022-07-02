@@ -14,9 +14,9 @@ public:
     void printResults(std::vector<std::string> result); // prints results at the termination of the program
 private:
     std::vector<std::string> retrieveInput(std::vector<std::string> emptyvec); // this vector retrieves the users input
-    std::vector<std::string> noMatchingElements(std::vector<std::string> vec); // this vector ensures that there are no matching emails
+    std::vector<std::string> noMatchingElements(std::vector<std::string> vec); // this vector ensures that there are no matching elements
     std::vector<std::string> noEmptyElements(std::vector<std::string> vector); // this function returns a vector without empty elements
-    std::string removeSpaces(std::string line); // this function returns a vector without spaces
+    std::string removeSpaces(std::string line); // this function returns a string without spaces
     void askUserSettings(); // ask the user to select from a variety of settings based off their need
     std::vector<std::string> foundErrorS; // contains the string that had errors
     std::vector<char> symbolfilter; // vector containing filter for symbols
@@ -25,12 +25,12 @@ private:
     bool duplicatestatus; // states if duplicates need to be filtered or not
     bool emptystatus; // states if empty cells need to be filtered or not
     bool sortstatus; // states if input should be sorted alphabetically
-    void startprogram();
-    void emptyswitch(bool &emptystatus);
-    void sortswitch(bool &sortstatus);
-    void duplicateswitch(bool &duplicatestatus);
-    void adjustcharfilter();
-    void adjustsymbolfilter();
+    void startprogram(); // starts program in constructor
+    void emptyswitch(bool &emptystatus); // switches status
+    void sortswitch(bool &sortstatus); // switches status
+    void duplicateswitch(bool &duplicatestatus); // switches status
+    void adjustcharfilter(); // allows user to add/remove characters to/from filter list
+    void adjustsymbolfilter(); // allows user to add/remove symbols to/from filter list
 };
 
 #endif

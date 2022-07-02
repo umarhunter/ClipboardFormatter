@@ -7,39 +7,48 @@
 #include <cstddef>
 #include <vector>
 #include <algorithm>
+// we need to include the header file, or else none of these functions will be defined
+// we also need all these libraries for our program, some of these must be transferred to other .cpp files
+
 
 CFormat::CFormat() {
+    // constructor will set initial boolean values and automatically load up initial filters.
+    // the user will be able to change the settings after program runs
     duplicatestatus = true;
     emptystatus = true;
     sortstatus = false;
     symbolfilter.push_back('"');
     symbolfilter.push_back(' ');
-    startprogram();
+    startprogram(); // starts the rest of the program
 }
 
 void CFormat::startprogram() {
-    askUserSettings(); // user can select from a variety of options to change from
-    std::vector<std::string> emptyvec;
+    askUserSettings(); // user will be prompted to change conditions in this function
+    std::vector<std::string> emptyvec; // just an empty vector which will be used to load input
     std::vector<std::string> retrievedVec = retrieveInput(emptyvec);
     if(emptystatus)
+        // if user set this status to true, it will filter out the empty elements/inputs
         retrievedVec = noEmptyElements(retrievedVec);
     if(duplicatestatus)
+        // if user set this status to true, it will filter out the duplicate elements/inputs
         retrievedVec = noMatchingElements(retrievedVec);
     printResults(retrievedVec);
 }
 
-std::vector<std::string> CFormat::retrieveInput(std::vector<std::string> emptyvec) { // retrieves the user input and loads corrected version into vector.
+std::vector<std::string> CFormat::retrieveInput(std::vector<std::string> emptyvec) {
+    // retrieves the user input and loads corrected version into vector
     std::string currentline;
     while(getline(std::cin,currentline)){
         if (currentline == "end")
             break;
-        emptyvec.push_back(removeSpaces(currentline)); // store this in a vector so that we can save it in the user clipboard at the completion of the program
+        emptyvec.push_back(removeSpaces(currentline));
+        // store this in a vector so that we can save it in the user clipboard at the completion of the program
     }
     return emptyvec;
 }
 
-std::string CFormat::removeSpaces(std::string line) { // primary function that actually sorts through the strings.
-    // instead of "removing" the said element, it just loads the non-targeted elements into a new vector.
+std::string CFormat::removeSpaces(std::string line) { // primary function that actually sorts through the strings
+    // instead of "removing" the said element, it just loads the non-targeted elements into a new vector
     size_t size = line.size(); // size of the string
     std::string stringwospace; // string without spaces
     for(int index = 0; index < size; index++){
@@ -68,8 +77,8 @@ std::vector<std::string> CFormat::noEmptyElements(std::vector<std::string> vec) 
 }
 
 std::vector<std::string> CFormat::noMatchingElements(std::vector<std::string> vec) {
-    if(sortstatus)
-        sort(vec.begin(), vec.end()); // if user changed settings to sort alphabetically
+    if(sortstatus) // if user set this to true then it will sort the contents alphabetically
+        sort(vec.begin(), vec.end());
     if(duplicatestatus)
         vec.erase(unique(vec.begin(),vec.end()),vec.end());
     return vec;
