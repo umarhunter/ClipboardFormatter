@@ -25,6 +25,8 @@ CFormat::CFormat() {
 void CFormat::startprogram() {
     askUserSettings(); // user will be prompted to change conditions in this function
     std::vector<std::string> emptyvec; // just an empty vector which will be used to load input
+    std::cout << "\n\n\nPROGRAM HAS INITIALIZED. PLEASE BEGIN ENTERING INPUTS. TYPE 'END' TO TERMINATE OR FEED THE "
+    "PROGRAM A TEXT FILE (SAMPLE ALREADY GIVEN) AND IT WILL AUTOMATICALLY TERMINATE." << std::endl;
     std::vector<std::string> retrievedVec = retrieveInput(emptyvec);
     if(emptystatus)
         // if user set this status to true, it will filter out the empty elements/inputs

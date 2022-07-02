@@ -72,7 +72,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 char check;
                 std::cout << "FILTER EMPTY ELEMENTS IS CURRENTLY SET TO: " << emptystatus;
                 (emptystatus) ? std::cout << " - ON\n" : std::cout << " - OFF\n";
-                std::cout << "\nWould you like to switch the status?\n"
+                std::cout << "Would you like to switch the status?\n"
                              "Enter y/n:";
                 std::cin >> check;
                 if (check == 'y') {
@@ -88,7 +88,8 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
                 char check;
                 std::cout << "SORTING IS CURRENTLY SET TO: " << sortstatus;
                 (sortstatus) ? std::cout << " - ON\n" : std::cout << " - OFF\n";
-                std::cout << "Would you like to switch the status? Enter y/n: ";
+                std::cout << "Would you like to switch the status?\n"
+                             "Enter y/n: ";
                 std::cin >> check;
                 if (check == 'y') {
                     sortswitch(sortstatus);
@@ -112,8 +113,7 @@ void CFormat::askUserSettings() { // ask the user a variety of questions to suit
     } while (loop == 1);
 }
 
-/* SOME OF THESE FUNCTIONS WILL BE REMOVED IF FOUND UNNECESSARY DURING FINAL STAGE */
-
+// begin defining functions for cases below
 void CFormat::adjustsymbolfilter() {
     int intinput;
     char symbolinput;

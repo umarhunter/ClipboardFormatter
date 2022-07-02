@@ -31,6 +31,7 @@ private:
     void duplicateswitch(bool &duplicatestatus); // switches status
     void adjustcharfilter(); // allows user to add/remove characters to/from filter list
     void adjustsymbolfilter(); // allows user to add/remove symbols to/from filter list
+    void saveFile(); // this function will save output to txt file
 };
 
 #endif
