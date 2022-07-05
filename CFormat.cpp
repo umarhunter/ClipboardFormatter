@@ -101,5 +101,6 @@ void CFormat::saveFile(std::vector<std::string> finalresultVec) {
     std::ofstream outputFile("result.txt");
     for(const auto &index : finalresultVec)
         outputFile << index << "\n";
+    std::cout << "SUCCESS. New .txt file has been created in the local directory.";
 }
 
