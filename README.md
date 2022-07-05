@@ -23,17 +23,3 @@ Features:
 * patched user settings not saving
 * major bug fixes
 * minor UI updates
-
-#### Previously Completed:
-Version 2:
-* cleaned up code (removed unnecessary functions, variables, etc)
-* added function to check if identical elements (emails) exist to prevent potential spam
-* added a print function
-* added function that checks for empty emails
-* user settings! (this took some massive investment and time)
-
-Version 1:
-* Contains necessary classes and functions (does not have to be complete)
-
-
-
