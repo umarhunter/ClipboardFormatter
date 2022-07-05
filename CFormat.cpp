@@ -4,6 +4,7 @@
 #include "CFormat.hpp"
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <cstddef>
 #include <vector>
 #include <algorithm>
@@ -35,6 +36,7 @@ void CFormat::startprogram() {
         // if user set this status to true, it will filter out the duplicate elements/inputs
         retrievedVec = noMatchingElements(retrievedVec);
     printResults(retrievedVec);
+    saveFile(retrievedVec);
 }
 
 std::vector<std::string> CFormat::retrieveInput(std::vector<std::string> emptyvec) {
@@ -89,9 +91,15 @@ std::vector<std::string> CFormat::noMatchingElements(std::vector<std::string> ve
 void CFormat::printResults(std::vector<std::string> result) {
     std::cout << "Clipboard Formatter has compiled successfully. Here are the results:" << std::endl;
     std::cout << "Number of errors found: " << foundErrorN << std::endl;
-    size_t size = result.size();
-    for(int index = 0; index < size; index++){
-        std::cout << result[index] << std::endl;
+    //size_t size = result.size();
+    for(auto index : result){
+        std::cout << index << std::endl;
     }
+}
+
+void CFormat::saveFile(std::vector<std::string> finalresultVec) {
+    std::ofstream outputFile("result.txt");
+    for(const auto &index : finalresultVec)
+        outputFile << index << "\n";
 }
 
